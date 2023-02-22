@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage("Clean up from previous build") {
-            steps {
-                deleteDir()
-            }
-        }
+        //stage("Clean up from previous build") {
+        //    steps {
+        //        deleteDir()
+        //    }
+        //}
         stage('Build') {
             steps {
                 sh '. /etc/profile.d/maven.sh; pwd; ls -l; mvn -X -B -DskipTests clean package'
