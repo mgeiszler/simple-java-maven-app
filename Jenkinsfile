@@ -1,29 +1,24 @@
 pipeline {
     agent any
     stages {
-        //stage("Clean up from previous build") {
-        //    steps {
-        //        deleteDir()
-        //    }
-        //}
         stage('Build') {
             steps {
-                sh '. /etc/profile.d/maven.sh; pwd; ls -l; mvn -X -B -DskipTests clean package'
+                sh '. /etc/profile.d/maven.sh; pwd; ls -l; mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh '. /etc/profile.d/maven.sh; pwd; ls -l; mvn -X test'
+                sh '. /etc/profile.d/maven.sh; pwd; ls -l; mvn test'
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    sh '. /etc/profile.d/maven.sh; pwd; ls -al; junit target/surefire-reports/*.xml'
                 }
             }
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh '. /etc/profile.d/maven.sh; pwd; ls -al; ./jenkins/scripts/deliver.sh'
             }
         }
     }
