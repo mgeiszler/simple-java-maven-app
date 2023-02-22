@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '. /etc/profile.d/maven.sh; mvn -B -DskipTests clean package'
+                sh '. /etc/profile.d/maven.sh; pwd; mvn -X -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh '. /etc/profile.d/maven.sh; mvn test'
+                sh '. /etc/profile.d/maven.sh; pwd; mvn -X test'
             }
             post {
                 always {
