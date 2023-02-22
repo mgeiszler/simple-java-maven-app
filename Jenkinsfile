@@ -10,11 +10,11 @@ pipeline {
             steps {
                 sh '. /etc/profile.d/maven.sh; pwd; ls -l; mvn test'
             }
-            post {
-                always {
-                    sh '. /etc/profile.d/maven.sh; pwd; ls -al; junit target/surefire-reports/*.xml'
-                }
-            }
+            //post {
+            //    always {
+            //        sh '. /etc/profile.d/maven.sh; pwd; ls -al; junit target/surefire-reports/*.xml'
+            //    }
+            //}
         }
         stage('Deliver') {
             steps {
